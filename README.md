@@ -84,5 +84,23 @@ thêm connect và tạo store cho reducer, cho một <Provider store={store}>
  Cách sử dụng là this.props.todp.
  
 
-
-
+    export const actionTest= test=>({
+      type:"ACTION",
+      "test":test
+    });
+    // hàm trên sẽ trả về object
+    {
+        type:"ACTION",
+        "test":test
+    }
+    dispatch(addTodo("Nguyễn Minh ĐỨc")) // hàm addTodo trả về object 
+    {
+        type:"ACTION",
+        "test":"Nguyễn Minh ĐỨc"
+    }
+    reducer nhân đc Object này
+    
+    case "ACTION":
+    console.log("ACTION ACTIVE  Object.assign({},action.test)");
+      return Object.assign({},action.test);
+    
