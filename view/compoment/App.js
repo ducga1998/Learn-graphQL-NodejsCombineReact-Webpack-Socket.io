@@ -2,6 +2,14 @@ import React, { Component } from 'react';
 import './app.css';
 import subscribeToTimer from "./Socket";
 import Form from "./FormChangeDataBase";
+//import compoment redux
+import { createStore } from "redux";
+import { Provider } from "react-redux";
+import rootReducer from "../../reducer";
+import { toggleTodo } from "../../action/index";
+const store = createStore(rootReducer);
+console.log(store.dispatch(toggleTodo(2)));
+console.log(store.getState());
 
 
 class App extends Component {
@@ -46,22 +54,24 @@ this.setState({ toggle: !this.state.toggle });
           </div>;
           })
          
-    return (<div className="App">
-        <div>
-          <p className="App-intro">
-            This is the timer value: {this.state.timestamp}
-          </p>
+    return <Provider store={store}>
+        <div className="App">
+          <div>
+            <p className="App-intro">
+              This is the timer value: {this.state.timestamp}
+            </p>
+          </div>
+          <Form />
+          <ul>{JSX}</ul>
+
+          <form action="">
+            <input id="m" autocomplete="off" />
+          </form>
+          <button className="btnToggle" onClick={this.SendMess}>
+            {this.state.toggle ? "Bật" : "Tắt"}
+          </button>
         </div>
-        <Form/>
-        <ul>{JSX}</ul>
-        
-        <form action="">
-          <input id="m" autocomplete="off" />
-        </form>
-        <button className="btnToggle" onClick={this.SendMess}>
-          {this.state.toggle ? "Bật" : "Tắt"}
-        </button>
-        </div>);
+      </Provider>;
   }
 }
 
