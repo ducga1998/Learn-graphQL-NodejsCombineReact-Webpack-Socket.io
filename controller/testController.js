@@ -2,7 +2,11 @@
 const modelTest=require('../models/users');
 
 const testcontroller=()=>{
-     
+     function all(req,res){
+            modelTest.find({}, (err, result) => {
+                res.send(result);
+            });
+     }
      function test(req, res) {
        modelTest.find({}, (err, result) => {
          if (err) {
@@ -29,9 +33,11 @@ const testcontroller=()=>{
 //         });
         modelTest.create(
           { name:req.body.name
-            ,duc:req.body.duc}, 
+            ,duc:req.body.duc
+          }, 
             function(err, small) {
           if (err) return handleError(err);
+          console.log(req.body.duc);
           // saved!
         });
         // newObj.save((err, result) => {
@@ -40,7 +46,7 @@ const testcontroller=()=>{
         //   }
         // });
       }
-     return { test: test, process: processs, Create: Create };
+     return { test: test, process: processs, Create: Create, all:all};
    
 
 }

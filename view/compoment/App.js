@@ -1,43 +1,67 @@
 import React, { Component } from 'react';
 import './app.css';
 import subscribeToTimer from "./Socket";
-
+import Form from "./FormChangeDataBase";
 
 
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = { timestamp: "no timestamp yet" };
+    this.state = { timestamp: "no timestamp yet", toggle:true,array:[] };
     subscribeToTimer((err, timestamp) => this.setState({ timestamp }));
+    this.SendMess=this.SendMess.bind(this);
   }
-  // componentDidMount() {
-  //   this.callApi()
-  //     .then(res => this.setState({ response: res.express }))
-  //     .catch(err => console.log(err));
-  // }
+  
+  componentDidMount() {
+   setInterval(() => {
+     fetch("/api/all")
+       .then(result => {
+         return result.json();
+       })
+       .then(data => {
+       
 
-  // callApi = async () => {
-  //   const response = await fetch('/api/hello');
-  //   const body = await response.json();
+         this.setState({ array: data });
+       });
+   }, 200);
+  }
 
-  //   if (response.status !== 200) throw Error(body.message);
-
-  //   return body;
-  // };
-
+    
+  SendMess(){
+console.log("send Main");
+this.setState({ toggle: !this.state.toggle });
+  }
   render() {
-    return <div className="App">
+          var arrayTest = this.state.array;
+          
+        const JSX=  arrayTest.map((element)=>{
+          
+        return <div>
+            <li>
+              <h1 key={element._id}>{element._id}</h1>
+            </li>
+            <li>
+              <h1 key={element._id}>{element.duc}</h1>
+            </li>
+          </div>;
+          })
+         
+    return (<div className="App">
         <div>
           <p className="App-intro">
             This is the timer value: {this.state.timestamp}
           </p>
         </div>
-        <ul id="messages" />
+        <Form/>
+        <ul>{JSX}</ul>
+        
         <form action="">
           <input id="m" autocomplete="off" />
-          <button>Send</button>
         </form>
-      </div>;
+        <button className="btnToggle" onClick={this.SendMess}>
+          {this.state.toggle ? "Bật" : "Tắt"}
+        </button>
+        </div>);
   }
 }
 

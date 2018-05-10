@@ -15,7 +15,16 @@ const Route=require('./route');
 
 
 
+app.use(
+  bodyParser.urlencoded({
+    extended: false
+  })
+);
 
+/**bodyParser.json(options)
+ * Parses the text as JSON and exposes the resulting object on req.body.
+ */
+app.use(bodyParser.json());
 app.set(`views`, path.join(__dirname, `view`));
 app.set(`view engine`, `ejs`);
 app.get('/node',function(req,res){
@@ -42,9 +51,7 @@ io.on("connection", function(socket) {
   });
 });
 
-app.get('/', function(req, res){
-  res.sendFile(__dirname + '/index.html');
-});
+
 Route(app);
 http.listen(port, function() {
   console.log("listening on *:" + port);

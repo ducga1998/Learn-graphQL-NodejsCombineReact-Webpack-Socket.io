@@ -30,14 +30,18 @@ module.exports = {
     open: true,
     proxy: {
       "/api": "http://localhost:8000"
+    },
+    setup: app => {
+      app.get("/test", (req, res) => {
+        res.redirect(req.originalUrl);
+      });
     }
   },
   plugins: [
     new CleanWebpackPlugin([outputDirectory]),
     new HtmlWebpackPlugin({
       template: "./public/client/index.html",
-      title:"duc"
-     
+      title: "duc"
     })
   ]
 };
