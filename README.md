@@ -1,5 +1,10 @@
 # Learn-graphQL-NodejsCombineReact-Webpack-Socket.io
-
+1. luyện về tư duy trên các trang ngư hacker rank.Thuật toán
+2. Follow các chuẩn về coding style của thế giới
+3. Design pattern
+Nói chung thế là ngon rồi
+Thời gian dần trôi sẽ ngày càng ngon
+Nhớ vọc code trên các lib xịn trên github nữa
 Learn-graphQL-NodejsCombineReact-Webpack-Socket.io
 Project use for learn Javascript.Practive Javasript both client(react) and server(nodejs)
 Thanks You for care !!!!
